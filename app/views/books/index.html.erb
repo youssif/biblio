@@ -1,28 +1,40 @@
-<h1>Listing books</h1>
+<% if current_user != nil %>
+  <h1>Listing books</h1>
 
-<table>
-  <tr>
-    <th>Author</th>
-    <th>Title</th>
-    <th>ISBN</th>
-    <th>Book Cover</th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @books.each do |book| %>
-  <tr>
-    <td><%= book.author %></td>
-    <td><%= book.title %></td>
-    <td><%= book.isbn %></td>
-    <td><%= image_tag(book.cover) %></td>
-    <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
-    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <table>
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>ISBN</th>
+      <th>Book Cover</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.author %></td>
+      <td><%= book.title %></td>
+      <td><%= book.isbn %></td>
+      <td><%= image_tag(book.cover) %></td>
+      <td><%= link_to 'Show', book %></td>
+      <td><%= link_to 'Edit', edit_book_path(book) %></td>
+      <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+
+  <br />
+
+  <%= link_to 'Add a new book', new_book_path, class: "btn btn-large" %>
+
+<% else %>
+  
+  <h1>Sign in or Register!</h1>
+  <%= link_to 'Sign In', new_user_session_path %> |
+  <%= link_to 'Register Now!', new_user_registration_path %>
+
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'Add a new book', new_book_path %>

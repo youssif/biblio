@@ -1,8 +1,13 @@
 class BooksController < ApplicationController
   # GET /books
   # GET /books.json
+
+
   def index
-    @books = Book.all
+    
+    unless current_user == nil
+      @books = Book.where(:user_id => current_user.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,13 +39,15 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
+    @book = Book.where(:user_id => current_user.id)
   end
 
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(params[:book])
+    @book = Book.new(params[:book]) do |book|
+      book.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @book.save
@@ -51,6 +58,8 @@ class BooksController < ApplicationController
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # PUT /books/1
@@ -80,4 +89,8 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+
 end
