@@ -32,9 +32,15 @@
 
 <% else %>
   
-  <h1>Sign in or Register!</h1>
-  <%= link_to 'Sign In', new_user_session_path %> |
-  <%= link_to 'Register Now!', new_user_registration_path %>
+  <center>
+  <div class = "sign_in">
+    <h1 class="sign_title">Log in or Register Today!</h1>
+      <div class="links">
+        <%= link_to 'Login', new_user_session_path %> |
+        <%= link_to 'Register', new_user_registration_path %>
+      </div>
+  </div>
+  </center>
 
 <% end %>
 

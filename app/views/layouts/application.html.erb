@@ -8,14 +8,28 @@
 </head>
 <body>
 
-<%# user is logged in, show log out link %>
-<% if current_user.present? %>
-  <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
-<%# user is not logged in, show signup and login links %>
-<% else %>
-  <%= link_to 'Sign In', new_user_session_path %> |
-  <%= link_to 'Register Now!', new_user_registration_path %>
-<% end %>
+<div class = "navbar">
+	<div class = "navbar-inner">
+		<a class = "brand" href="#">Biblio</a>
+		<ul class = "nav nav-pills">
+			<%# user is logged in, show log out link %>
+			<% if current_user.present? %>
+				<li>  
+				  <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
+				</li>
+			<%# user is not logged in, show signup and login links %>
+			<% else %>
+				<li>
+				  <%= link_to 'Sign In', new_user_session_path %>
+				</li>
+				<li>
+				  <%= link_to 'Register Now!', new_user_registration_path %>
+				</li>
+			<% end %>
+
+		</ul>
+	</div>
+</div>
 
 <div class = "container">
 	<p class="notice"><%= notice %></p>
