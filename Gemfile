@@ -33,6 +33,8 @@ gem 'carrierwave', '~> 0.9.0'
 
 gem 'devise'
 
+gem 'goodreads'
+
 
 
 # To use ActiveModel has_secure_password

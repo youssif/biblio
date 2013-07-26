@@ -49,6 +49,14 @@ class BooksController < ApplicationController
       book.user_id = current_user.id
     end
 
+    #Trying to pull book data from the ISBN, able to return the objects
+    #within Rails Console, but need to fetch the data more granularly
+    #to get this all to work. 
+    @book_id = @client.book_by_isbn(@book.isbn).first[1]
+    @current_book = @client.book(@book_id)
+    @book_title = @current_book.title
+    @book.fetch_info
+
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
